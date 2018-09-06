@@ -5,9 +5,8 @@ using namespace std;
 
 void displayActivity(string s)
 {
-	if(s.compare("1")==0){
+	if(s.compare("1")==0)
 		cout<<"Recording seizure activity\n";
-	}
 	else if(s.compare("2")==0)
 		cout<<"recording EEG from area of tumor\n";
 	else if(s.compare("3")==0)
@@ -68,7 +67,6 @@ int dataForEachIndividual()
 			getline(file,token,'"');
 			if(y.compare(token)==0){
 				msg=getOneSecondData(i);
-				//cout<<msg<<endl;
 				displayActivity(msg);
 				return 0;
 			}
@@ -106,11 +104,19 @@ void data()
 			}
 		}
 		count=count/23;
-		cout<<count;
+		cout<<"there are "<<count<< " such patients"<<endl;
 	}
 }
 
 int main() {
-	data();
-    //dataForEachIndividual();
+	int select;
+	cout<<"Enter the number corresponding to your querry."<<endl;
+	cout<<"1. Get a person's brain activity"<<endl<<"2. Get number of people with a particular brain activity."<<endl;
+	cin>>select;
+	if(select==2)
+		data();
+	else if(select==1)
+    	dataForEachIndividual();
+	else 
+		cout<<"please select one of the given choices";
 }
