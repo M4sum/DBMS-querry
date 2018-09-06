@@ -5,8 +5,9 @@ using namespace std;
 
 void displayActivity(string s)
 {
-	if(s.compare("1")==0)
+	if(s.compare("1")==0){
 		cout<<"Recording seizure activity\n";
+	}
 	else if(s.compare("2")==0)
 		cout<<"recording EEG from area of tumor\n";
 	else if(s.compare("3")==0)
@@ -67,6 +68,7 @@ int dataForEachIndividual()
 			getline(file,token,'"');
 			if(y.compare(token)==0){
 				msg=getOneSecondData(i);
+				//cout<<msg<<endl;
 				displayActivity(msg);
 				return 0;
 			}
@@ -74,7 +76,41 @@ int dataForEachIndividual()
     }
 }
 
-int main() {
+void data()
+{
+	string b;
+	cout<<"Enter condition:"<<endl;
+	cin>>b;
+	string x;
+	int a = 1;
+	int count=0;
+	ifstream file("data.csv");
+	if (!file)
+	{
+		cout << "Unable to open file";
+	}
+	else
+	{
+		getline(file, x);
+		for (int i = 0; i < 11503; i++)
+		{
+			a = 1;
+			while (a < 180)
+			{
+				getline(file, x, ',');
+				a++;
+			}
+			getline(file, x, '\n');
+			if(x.compare(b)==0){
+				count++;
+			}
+		}
+		count=count/23;
+		cout<<count;
+	}
+}
 
-    dataForEachIndividual();
+int main() {
+	data();
+    //dataForEachIndividual();
 }
